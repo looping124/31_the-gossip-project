@@ -1,0 +1,10 @@
+<h1>Gossip n° <%= @gossip.id%></h1>
+  <span><b> Titre :</b></span>
+  <%= @gossip.title%>
+  <br />
+  <span><b> Auteur :</b></span>
+  <a href="<%=user_path(@gossip.user.id)%>"> <%= @gossip.user.last_name%></a>
+  <br />
+  <span><b> Gossip :</b></span>
+  <%= @gossip.content%>
+  <br />

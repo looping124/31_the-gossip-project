@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get '/team(/:name)', to: 'default#team', as: 'team_name'
   get '/contact', to: 'default#contact'
   get '/welcome(/:name)', to: 'default#welcome', as: 'welcome'
+  get '/gossip/:id',to: 'default#gossip', as: 'gossip'
+  get '/user/:id',to: 'default#user', as: 'user'
 
 
 
