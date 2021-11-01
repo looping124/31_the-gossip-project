@@ -1,0 +1,10 @@
+<h1>Welcome <%=@user.first_name%></h1>
+<p>Find me in app/views/static/index.html.erb</p>
+<p>test <%=@number%> </p>
+
+
+<form action ="/" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="text" name="first_name">
+  <input type="submit" name="Envoyer">
+</form>

@@ -1,0 +1,17 @@
+<h1>Voici tous les gossips :</h1>
+
+<ul>
+<% @gossips.each do |gossip|%>
+<li>
+  <span><b> Titre :</b></span>
+  <%= gossip.title%>
+  <br />
+  <span><em> Auteur :</em></span>
+  <%= gossip.user.last_name%>
+  <br />
+  <br />
+</li>
+<% end %>
+
+
+</ul>>
