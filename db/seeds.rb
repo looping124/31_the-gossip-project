@@ -14,12 +14,22 @@ Tag.destroy_all
 PrivateMessage.destroy_all
 Comment.destroy_all
 Like.destroy_all
+Faker::Config.locale = 'fr'
+cities_array=["Paris","Marseille","Lyon","Toulouse","Nice","Nantes","Strasbourg","Montpellier","Bordeaux","Lille"]
 
-
-#Création de 10 villes avec Faker
-10.times do |index|
-  City.create(name:Faker::Address.city)
+#Création de 10 villes 
+cities_array.each do |city|
+  City.create(name:city)
 end
+#Création de anonymous
+User.create(
+  first_name:"el" ,
+  last_name:"Anonymous",
+  description:Faker::Lorem.sentence(word_count: 5),
+  email:Faker::Internet.email,
+  age:rand(18..60),
+  city:City.all.sample
+)
 
 #Création de 10 users
 10.times do |index|
@@ -29,15 +39,20 @@ User.create(
   description:Faker::Lorem.sentence(word_count: 5),
   email:Faker::Internet.email,
   age:rand(18..60),
-  city:City.all[rand(0..City.all.size-1)]
+  city:City.all.sample
 )
 puts "User #{index+1} créé"
 end
 
 #Création de 20gossips
 20.times do |index|
-  Gossip.create(title:Faker::Lorem.sentence(word_count: 3),content:Faker::Lorem.sentence(word_count: 10), user:User.all[rand(0..User.all.size-1)])
-  puts "Gossip #{index+1} créé"
+  gossipx = Gossip.create(title:Faker::Lorem.sentence(word_count: 2),content:Faker::Lorem.sentence(word_count: 10), user:User.all.sample)
+  puts "ooooooooooooooooooooooooooooooooooo"
+  puts gossipx.title.length
+  puts "Gossip #{gossipx.id} créé"
+  puts "title : " + gossipx.title
+  puts "content : " + gossipx.content
+  puts gossipx.user
 end
 
 #Création de 10 tags
@@ -51,7 +66,7 @@ index = 0
 Gossip.all.each do |gossip|
   nb_of_tags = rand(1..3)
   nb_of_tags.times do
-    Tagger.create(tag:Tag.all[rand(0...Tag.all.size)],gossip:gossip)
+    Tagger.create(tag:Tag.all.sample,gossip:gossip)
     puts "Tagger #{index+1} créé"
     index+=1
   end
@@ -59,13 +74,14 @@ end
 
 #Création de 10 messages privés
 10.times do |index|
-   PrivateMessage.create(sender:User.all[rand(0...User.all.size)],recipient:User.all[rand(0...User.all.size)])
+   PrivateMessage.create(sender:User.all.sample,recipient:User.all[rand(0...User.all.size)])
     puts "MP#{index+1} créé"
 end
 
 #On créé 20 commentaires de gossips
 20.times do |index|
-  Comment.create(content:Faker::Lorem.sentence(word_count: 4),commentable:Gossip.all[rand(0...Gossip.all.size)],user:User.all[rand(0...User.all.size)])
+ 
+  Comment.create(content:Faker::Lorem.sentence(word_count: 4),commentable:Gossip.all.sample,user:User.all.sample)
    puts "Comment de gossip#{index+1} créé"
 end
 

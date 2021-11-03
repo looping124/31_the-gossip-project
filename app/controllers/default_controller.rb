@@ -1,10 +1,12 @@
 class DefaultController < ApplicationController
 
   def home
-    @gossips = Gossip.all
+    @gossips = Gossip.all.order('created_at DESC')
+    puts "ooooooooo"
+    puts @gossips.class
   end
 
-  def gossip
+  def potin
     @id=params[:id]
   
     @gossip = Gossip.find_by(id: @id)

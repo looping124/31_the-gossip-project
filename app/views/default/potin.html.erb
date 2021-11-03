@@ -1,3 +1,7 @@
+<% if flash[:success]%>
+<div class="alert alert-success" > <%= flash[:success] %> </div>
+
+<% end %>
 <h1>Gossip n° <%= @gossip.id%></h1>
   <%
 =begin%>
@@ -24,3 +28,5 @@
     </blockquote>
   </div>
 </div>
+
+

@@ -1,6 +1,11 @@
-<h1>Voici tous les gossips :</h1>
+  <div class="container my-temoignages">
+    <div class="row my-row ">
+<h1 class="row justify-content-around">Voici tous les gossips :</h1>
+<a class="btn btn-secondary m-4" href="<%=new_gossip_path%>" role="button">Créer un gossip</a>
+</div></div>
+<div class="container my-points">
+  <div class="row  justify-content-between my-rowrow">
 
-<ul>
 <% @gossips.each do |gossip|%>
 <%
 =begin%>
@@ -19,14 +24,15 @@
 <%
 =end%>
 
-<div class="card w-50 ">
+<div class="card col-md-6 mt-2" style="width: 40rem;">
   <div class="card-body">
     <h5 class="card-title"><b> Titre : </b><%= gossip.title%></h5>
-    <p class="card-text"><em> Auteur : </em><%= gossip.user.last_name%></p>
-    <a href="<%=gossip_path(gossip.id)%>" class="btn btn-primary btn-dark">Afficher</a>
+    <p class="card-text"><em> Auteur : </em><a href="<%=user_path(gossip.user.id)%>" class=""><%= gossip.user.last_name%></a></p>
+    <p class="card-text"><em> Ville : </em><a href="<%=city_path(gossip.user.city.id)%>" class=""><%= gossip.user.city.name%></a></p>
+    <a href="<%=gossip_path(gossip.id)%>" class="btn btn-dark">Afficher</a>
   </div>
 </div>
 <% end %>
 
 
-</ul>>
+</div></div>
