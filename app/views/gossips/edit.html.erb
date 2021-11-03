@@ -1,9 +1,10 @@
-<h1>Gossips#edit</h1>
-<p>Find me in app/views/gossips/edit.html.erb</p>
-
+<h1 class="m-2">Editer un Gossip</h1>
+<p></p>
+<div class="w-50 m-2">
 <%= simple_form_for @gossip do |f| %>
   <%= f.input :title %>
   <%= f.input :content %>
   <%= f.button :submit, "Editer Gossip", class: "btn btn-dark" %>
 
   <% end %>
+  </div>

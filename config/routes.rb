@@ -1,16 +1,10 @@
 Rails.application.routes.draw do
 
 
-  # get '/gossips/index' #la
-  # get '/gossips/show/:id',to: 'gossips#show', as: 'gossip_show' #et j'etais la
-  # get '/gossips/new'
-  # get '/gossips/create'
-  
-  # get '/gossips/edit'
-  # get '/gossips/update'
-  # get '/gossips/destroy'
+
   resources :gossips
   resources :cities, only: [:show]
+  resources :comments
 
   root to:'default#home'
 
