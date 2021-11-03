@@ -1,7 +1,7 @@
 class DefaultController < ApplicationController
 
   def home
-    @gossips = Gossip.all.order('created_at DESC')
+    @gossips = Gossip.all.order('updated_at DESC')
     puts "ooooooooo"
     puts @gossips.class
   end
@@ -11,7 +11,7 @@ class DefaultController < ApplicationController
   def user
     @id=params[:id]
     @user = User.find_by(id: @id)
-    @gossips_of_user = Gossip.where(user_id:@id)
+    @gossips_of_user = Gossip.where(user_id:@id).order('updated_at DESC')
   end
 
   def welcome

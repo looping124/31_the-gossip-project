@@ -14,7 +14,7 @@ class GossipsController < ApplicationController
       render 'new'
     elsif gossip.valid?
       gossip.save
-      redirect_to potin_path(gossip.id), success: "Gossip créé avec succès"
+      redirect_to gossip_path(gossip.id), success: "Gossip créé avec succès"
     else
       @gossip = gossip
       render 'new'
@@ -24,16 +24,24 @@ class GossipsController < ApplicationController
   end
 
   def show
-    @id=params[:id]
-  
-    @gossip = Gossip.find_by(id: @id)
+    @gossip = Gossip.find(params[:id])
   end
 
   def edit
-    
+    @gossip = Gossip.find(params[:id])
+    @gossip.content = @gossip.content.gsub( "\"", "")
   end
 
   def update
+    puts "%"*80
+    @gossip = Gossip.find(params[:id])
+    gossip_params = params.require(:gossip).permit(:title, :content)
+    
+    if @gossip.update(gossip_params)
+     redirect_to gossip_path(@gossip.id), success: "Gossip modifié avec succès"
+    else
+      render 'edit'
+    end
   end
 
   def destroy

@@ -1,2 +1,9 @@
 <h1>Gossips#edit</h1>
 <p>Find me in app/views/gossips/edit.html.erb</p>
+
+<%= simple_form_for @gossip do |f| %>
+  <%= f.input :title %>
+  <%= f.input :content %>
+  <%= f.button :submit, "Editer Gossip", class: "btn btn-dark" %>
+
+  <% end %>
