@@ -3,11 +3,11 @@ class GossipsController < ApplicationController
   end
 
   def new
-    @gossip = Gossip.new(title:"new",content:"new".inspect,user:User.all.first)
+    @gossip = Gossip.new(title:"new",content:"newnew",user:User.all.first)
   end
 
   def create
-    gossip = Gossip.new(title:params[:title],content:params[:content].inspect,user:User.all.first)
+    gossip = Gossip.new(title:params[:title],content:params[:content],user:User.all.first)
 
     if gossip.content == ""
       gossip.content = nil
@@ -25,6 +25,7 @@ class GossipsController < ApplicationController
 
   def show
     @gossip = Gossip.find(params[:id])
+    @comments =  @gossip.comments
   end
 
   def edit

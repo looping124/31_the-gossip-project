@@ -4,7 +4,11 @@ Rails.application.routes.draw do
 
   resources :gossips
   resources :cities, only: [:show]
-  resources :comments
+
+  resources :gossips do
+    resources :comments
+  end
+  # resources :comments, path: "comments/:gossip_id" 
 
   root to:'default#home'
 

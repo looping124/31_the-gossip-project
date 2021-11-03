@@ -33,7 +33,20 @@
   <p>
     <a href="<%=edit_gossip_path(@gossip.id)%>" class="btn btn-dark mt-2">Editer</a>
     <a href="" class="btn btn-danger mt-2" data-confirm="Etes vous sur de suprimmer ?" data-method="DELETE">Suprimmer</a>
-    <a href="/" class="btn btn-secondary mt-2">Commenter</a>
+    <a href="<%=new_gossip_comment_path(@gossip.id)%>" class="btn btn-secondary mt-2">Commenter</a>
   </p>
 
 </div>
+
+ <div class="w-50 m-2">
+    <% @comments.each do |comment|%>
+
+    <div class="card col-md-6 mt-2" style="width: 40rem;">
+      <div class="card-body">
+        <p class="card-text"><em> <%= comment.content %></em></p>
+        <p class="card-text"><em> Auteur : </em><%= comment.user.last_name%></p>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
