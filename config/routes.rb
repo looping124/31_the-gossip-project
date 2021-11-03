@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get '/contact', to: 'default#contact'
   get '/welcome(/:name)', to: 'default#welcome', as: 'welcome'
 
-  get '/potin/:id',to: 'default#potin', as: 'potin'
+
   get '/user/:id',to: 'default#user', as: 'user'
 
 

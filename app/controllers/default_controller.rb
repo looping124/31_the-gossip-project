@@ -6,11 +6,7 @@ class DefaultController < ApplicationController
     puts @gossips.class
   end
 
-  def potin
-    @id=params[:id]
-  
-    @gossip = Gossip.find_by(id: @id)
-  end
+
   
   def user
     @id=params[:id]

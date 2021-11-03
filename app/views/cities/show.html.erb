@@ -16,7 +16,7 @@
         <h5 class="card-title"><b> Titre : </b><%= gossip.title%></h5>
         <p class="card-text"><em> Auteur : </em><a href="<%=user_path(gossip.user.id)%>" class=""><%= gossip.user.last_name%></a></p>
         <p class="card-text"><em> Ville : </em><a href="<%=city_path(gossip.user.city.id)%>" class=""><%= gossip.user.city.name%></a></p>
-        <a href="<%=potin_path(gossip.id)%>" class="btn btn-dark">Afficher</a>
+        <a href="<%=gossip_path(gossip.id)%>" class="btn btn-dark">Afficher</a>
       </div>
     </div>
     <% end %>

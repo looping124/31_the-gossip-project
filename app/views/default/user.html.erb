@@ -40,7 +40,7 @@
     <h5 class="card-title"><b> Titre : </b><%= gossip.title%></h5>
     <p class="card-text"><em> Auteur : </em><%= gossip.user.last_name%></p>
     
-    <a href="<%=potin_path(gossip.id)%>" class="btn btn-primary btn-dark">Afficher</a>
+    <a href="<%=gossip_path(gossip.id)%>" class="btn btn-primary btn-dark">Afficher</a>
   </div>
 </div>
 <% end %>
