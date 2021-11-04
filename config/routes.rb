@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
 
 
+
   resources :sessions
   resources :users
   resources :gossips
@@ -11,7 +12,10 @@ Rails.application.routes.draw do
 
   resources :gossips do
     resources :comments
+    resources :likes
   end
+
+
 
 
   root to:'default#home'

@@ -1,19 +1,24 @@
 class CommentsController < ApplicationController
+
+  before_action :authenticate_user_is_author , only: [:edit,:destroy]
+
+  
   def index
   end
 
   def new
     @gossip = Gossip.find(params[:gossip_id])
-    @comment = Comment.new(content:"",user:User.all.first,commentable:@gossip)
+    @comment = Comment.new(content:"",user:current_user,commentable:@gossip)
   end
 
   def create
     
     comment_params = params.require(:comment).permit(:content)
     @gossip = Gossip.find(params[:gossip_id])
-    @comment = Comment.new(content:comment_params[:content], user:@gossip.user, commentable:@gossip)
+    @comment = Comment.new(content:comment_params[:content], user:current_user, commentable:@gossip)
 
-    if @comment.update(comment_params)
+    if @comment.valid?
+      @comment.save
       redirect_to gossip_path(params[:gossip_id]), success: "Commentaire ajouté avec succès"
      else
        render 'new'
@@ -31,8 +36,10 @@ class CommentsController < ApplicationController
   def update
     comment_params = params.require(:comment).permit(:content)
     @gossip = Gossip.find(params[:gossip_id])
-    @comment = Comment.new(content:comment_params[:content], user:@gossip.user, commentable:@gossip)
-    if @comment.update(comment_params)
+    @comment = Comment.find(params[:id])
+    comment_test = Comment.new(content:comment_params[:content], user:current_user, commentable:@gossip)
+    if comment_test.valid?
+      @comment.update(content:comment_params[:content], user:current_user, commentable:@gossip)
       redirect_to gossip_path(params[:gossip_id]), success: "Commentaire modifié avec succès"
      else
        render 'edit'
@@ -44,5 +51,12 @@ class CommentsController < ApplicationController
     @comment.destroy
     redirect_to gossip_path(params[:gossip_id])
   end
+private
 
+def authenticate_user_is_author
+  unless current_user == Comment.find(params[:id]).user
+    flash[:danger] = "Please log in."
+    redirect_to new_session_path
+  end
+end
 end

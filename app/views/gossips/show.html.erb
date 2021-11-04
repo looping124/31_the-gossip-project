@@ -34,11 +34,24 @@
      <%= tag.title %>
   <% end%>
 </p>
-
+<p>
+  Likes : <%= @gossip.likes.count%>
+</p>
   <p>
-    <a href="<%=edit_gossip_path(@gossip.id)%>" class="btn btn-dark mt-2">Editer</a>
-    <a href="" class="btn btn-danger mt-2" data-confirm="Etes vous sur de suprimmer ?" data-method="DELETE">Supprimer</a>
+    <%if current_user == @gossip.user %>
+      <a href="<%=edit_gossip_path(@gossip.id)%>" class="btn btn-dark mt-2">Editer</a>
+      
+      <a href="" class="btn btn-danger mt-2" data-confirm="Etes vous sur de suprimmer ?" data-method="DELETE">Supprimer</a>
+    <%elsif current_user%>
     <a href="<%=new_gossip_comment_path(@gossip.id)%>" class="btn btn-secondary mt-2">Commenter</a>
+    <%end %>
+    
+    <%if Like.find_by(likeable:@gossip, user:current_user) %>
+    <%= link_to "Unlike", gossip_like_path(@gossip, Like.find_by(likeable:@gossip, user:current_user)), :method => :delete , class:"btn btn-outline-success mt-2"%>
+    <%elsif current_user%>
+    <a href="<%=new_gossip_like_path(@gossip.id)%>" class="btn btn-success mt-2">Like</a>
+    <%end %>
+    
   </p>
 
 </div>
@@ -52,10 +65,11 @@
         <p class="card-text"><em> Auteur : </em><%= comment.user.last_name%>
         </p>
         <p>
-          <a href="<%=edit_gossip_comment_path(:gossip_id => @gossip.id,:id => comment.id)%>" class="link-secondary">Editer</a>
-          <a href="#" class= "link-danger"></a>
-          <%= link_to "Suprimmer", gossip_comment_path(@gossip, comment), :method => :delete %>
-          
+          <%if current_user == comment.user %>
+            <a href="<%=edit_gossip_comment_path(:gossip_id => @gossip.id,:id => comment.id)%>" class="link-secondary">Editer</a>
+            <a href="#" class= "link-danger"></a>
+            <%= link_to "Suprimmer", gossip_comment_path(@gossip, comment), :method => :delete %>
+          <%end %>
 
         </p>
         

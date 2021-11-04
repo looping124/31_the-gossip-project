@@ -30,15 +30,20 @@
           <li class="nav-item">
             <a class="nav-link" href="/contact">Contact</a>
           </li>
+
+          <% if current_user %>
           <li class="nav-item">
-            <a class="nav-link " href="<%=welcome_path%>">Welcome</a>
+            <a class="nav-link " href="<%=user_path(session[:user_id])%>">Welcome <%=current_user.first_name%></a>
           </li>
+          <% end %>
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
             <ul class="dropdown-menu" aria-labelledby="dropdown03">
-              <li><a class="dropdown-item" href="<%=new_user_path%>">Créer un compte</a></li>
-              <li><a class="dropdown-item" href="<%=new_session_path%>">Se connecter</a></li>
-              <li><a class="dropdown-item" href="#">Se déconnecter</a></li>
+              <% unless current_user %><li><a class="dropdown-item link-dark" href="<%=new_user_path%>">Créer un compte</a></li>
+              <li><a class="dropdown-item link-dark" href="<%=new_session_path%>">Se connecter</a></li> <% end %>
+              <% if current_user %> <li><%= link_to "Se déconnecter", session_path(session.id), method: :delete ,class:"dropdown-item link-dark"%></li> <% end %>
+              
             </ul>
           </li>
         </ul>

@@ -1,2 +1,12 @@
-<h1>Sessions#new</h1>
-<p>Find me in app/views/sessions/new.html.erb</p>
+<h1>Connexion</h1>
+
+<div class="w-50 m-2">
+  <%= simple_form_for :sessions, :url => sessions_path do |f| %>
+
+    <%= f.input :email%>
+    <%= f.input :password%>
+    
+    <%= f.button :submit, "Login" , class: 'btn-dark mt-2' %>
+    
+  <% end %>
+</div>

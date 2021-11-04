@@ -1,13 +1,17 @@
 class GossipsController < ApplicationController
+
+  before_action :authenticate_user, only: [:new]
+  before_action :authenticate_user_is_author , only: [:edit,:destroy]
+
   def index
   end
 
   def new
-    @gossip = Gossip.new(title:"new",content:"newnew",user:User.all.first)
+    @gossip = Gossip.new(title:"new",content:"newnew",user:current_user)
   end
 
   def create
-    gossip = Gossip.new(title:params[:title],content:params[:content],user:User.all.first)
+    gossip = Gossip.new(title:params[:title],content:params[:content],user:current_user)
 
     if gossip.content == ""
       gossip.content = nil
@@ -56,6 +60,23 @@ class GossipsController < ApplicationController
     @gossip.destroy
     redirect_to root_path
   end
+
+  private
+
+  def authenticate_user
+    unless current_user
+      flash[:danger] = "Please log in."
+      redirect_to new_session_path
+    end
+  end
+
+  def authenticate_user_is_author
+    unless current_user == Gossip.find(params[:id]).user
+      flash[:danger] = "Please log in."
+      redirect_to new_session_path
+    end
+  end
+
 
 
 end
