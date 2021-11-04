@@ -1,2 +1,23 @@
-<h1>Comments#edit</h1>
-<p>Find me in app/views/comments/edit.html.erb</p>
+<div class="w-50 m-2">
+<h1>Editer un commentaire </h1>
+
+  <div class="card">
+    <div class="card-header">
+      <%= @gossip.title%>
+    </div>
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+        <p><%= @gossip.content%></p>
+        <footer class="blockquote-footer"><a href="<%=user_path(@gossip.user.id)%>" class="link-secondary"> <%= @gossip.user.last_name%></a> <cite title="Source Title"><%= @gossip.created_at%></cite></footer>
+      </blockquote>
+    </div>
+  </div>
+
+<%= simple_form_for [@gossip, @comment] do |f| %>
+
+  <%= f.input :content %>
+  <%= f.button :submit, "Editer commentaire", class: "btn btn-dark mt-2"  %>
+  
+<% end %>
+
+</div>

@@ -1,0 +1,46 @@
+<h1>User n° <%= @user.id%></h1>
+  <span><b> Nom :</b></span>
+  <%= @user.last_name%>
+  <br />
+  <span><b> Prénom :</b></span>
+  <%= @user.first_name%>
+  <br />
+  <span><b> Ville :</b></span>
+  <a href="<%=city_path(@user.city.id)%>"> <%=@user.city.name%></a>
+  <br />
+  <span><b> Description :</b></span>
+  <%= @user.description%>
+  <br />
+  <br />
+  <br />
+
+  
+
+  <% @gossips_of_user.each do |gossip|%>
+<%
+=begin%>
+ <li>
+  <span><b> Titre :</b></span>
+  <%= gossip.title%>
+  <br />
+  <span><em> Auteur :</em></span>
+  <%= gossip.user.last_name%>
+  <br />
+  <a href="<%=gossip_path(gossip.id)%>"> Afficher</a>
+  
+  <br />
+  <br />
+
+</li> 
+<%
+=end%>
+
+<div class="card w-50">
+  <div class="card-body">
+    <h5 class="card-title"><b> Titre : </b><%= gossip.title%></h5>
+    <p class="card-text"><em> Auteur : </em><%= gossip.user.last_name%></p>
+    
+    <a href="<%=gossip_path(gossip.id)%>" class="btn btn-primary btn-dark">Afficher</a>
+  </div>
+</div>
+<% end %>

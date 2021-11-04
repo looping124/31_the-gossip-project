@@ -19,13 +19,19 @@ class GossipsController < ApplicationController
       @gossip = gossip
       render 'new'
     end
-
-
   end
 
   def show
     @gossip = Gossip.find(params[:id])
-    @comments =  @gossip.comments
+    puts "o" * 80
+    puts @gossip
+    
+    @comments =  @gossip.comments.order('updated_at DESC')
+    puts "o" * 80
+    puts @comments
+    @tags =  @gossip.tags
+    puts "o" * 80
+    puts @tags
   end
 
   def edit
@@ -34,7 +40,7 @@ class GossipsController < ApplicationController
   end
 
   def update
-    puts "%"*80
+    
     @gossip = Gossip.find(params[:id])
     gossip_params = params.require(:gossip).permit(:title, :content)
     

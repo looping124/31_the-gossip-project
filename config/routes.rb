@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
 
 
+
+  resources :users
   resources :gossips
   resources :cities, only: [:show]
 
@@ -17,7 +19,7 @@ Rails.application.routes.draw do
   get '/welcome(/:name)', to: 'default#welcome', as: 'welcome'
 
 
-  get '/user/:id',to: 'default#user', as: 'user'
+  # get '/user/:id',to: 'default#user', as: 'user'
 
 
 

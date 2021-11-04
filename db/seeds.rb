@@ -28,31 +28,28 @@ User.create(
   description:Faker::Lorem.sentence(word_count: 5),
   email:Faker::Internet.email,
   age:rand(18..60),
-  city:City.all.sample
+  city:City.all.sample,
+  password: "Anonymous"
 )
 
 #Création de 10 users
 10.times do |index|
-User.create(
+  last_name_faker = Faker::Name.last_name
+userx = User.create(
   first_name:Faker::Name.first_name ,
-  last_name:Faker::Name.last_name,
+  last_name:last_name_faker,
   description:Faker::Lorem.sentence(word_count: 5),
   email:Faker::Internet.email,
   age:rand(18..60),
-  city:City.all.sample
+  city:City.all.sample,
+  password: last_name_faker
 )
-puts "User #{index+1} créé"
+puts "User #{userx.id} créé"
 end
 
 #Création de 20gossips
 20.times do |index|
   gossipx = Gossip.create(title:Faker::Lorem.sentence(word_count: 2),content:Faker::Lorem.sentence(word_count: 10), user:User.all.sample)
-  puts "ooooooooooooooooooooooooooooooooooo"
-  puts gossipx.title.length
-  puts "Gossip #{gossipx.id} créé"
-  puts "title : " + gossipx.title
-  puts "content : " + gossipx.content
-  puts gossipx.user
 end
 
 #Création de 10 tags
