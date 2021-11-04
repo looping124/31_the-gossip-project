@@ -7,4 +7,5 @@ class User < ApplicationRecord
   has_many :private_messages
   has_secure_password
   validates :password, length: { minimum: 2, message: 'Password should be minimum 2 characters'}
+  validates :email, presence: true, uniqueness: true
 end

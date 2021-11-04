@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
 
 
+
+  resources :sessions
   resources :users
   resources :gossips
   resources :cities, only: [:show]
@@ -10,7 +12,7 @@ Rails.application.routes.draw do
   resources :gossips do
     resources :comments
   end
-  # resources :comments, path: "comments/:gossip_id" 
+
 
   root to:'default#home'
 
@@ -19,7 +21,7 @@ Rails.application.routes.draw do
   get '/welcome(/:name)', to: 'default#welcome', as: 'welcome'
 
 
-  # get '/user/:id',to: 'default#user', as: 'user'
+
 
 
 
