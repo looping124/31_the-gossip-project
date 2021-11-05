@@ -9,4 +9,13 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, length: { minimum: 2, message: 'Password should be minimum 2 characters'}
   validates :email, presence: true, uniqueness: true
+
+  def remember(remember_token)
+    remember_digest = BCrypt::Password.create(remember_token)
+    self.remember_digest = remember_digest
+    self.save(:validate => false)
+    puts "TOTOTOTOTOTOTOTOTOTOTOTOTOTOTOTO"
+    puts self.remember_digest
+  end
+
 end

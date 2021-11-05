@@ -15,9 +15,13 @@ class SessionsController < ApplicationController
 
     # on vérifie si l'utilisateur existe bien ET si on arrive à l'authentifier (méthode bcrypt) avec le mot de passe 
     if user && user.authenticate(session_params[:password])
-      session[:user_id] = user.id
+      
+      log_in(user)
+      remember(user)
+      puts "opopopopopopopopopopopopopopoopop"
+      puts user.remember_digest
       # redirige où tu veux, avec un flash ou pas
-      redirect_to root_path
+      redirect_to user_path(user.id)
 
     else
       flash.now[:danger] = 'Invalid email/password combination'
@@ -35,6 +39,15 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session.delete(:user_id)
+    
+      # on remet le remember_digest à nil puisqu'il ne nous servira plus :
+  # user.update(remember_digest: nil)
+  user = current_user
+  user.remember_digest = nil
+  user.save(:validate => false)
+  session.delete(:user_id)
+  # on efface les cookies dans le navigateur de l'utilisateur
+  cookies.delete(:user_id)
+  cookies.delete(:remember_token)
   end
 end

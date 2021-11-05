@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @id=params[:id]
+    @id = params[:id]
     @user = User.find_by(id: @id)
     @gossips_of_user = Gossip.where(user_id:@id).order('updated_at DESC')
   end
